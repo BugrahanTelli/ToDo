@@ -47,7 +47,8 @@ export function SignInForm() {
 
             router.push('/dashboard')
             router.refresh()
-        } catch (error) {
+        } catch {
+            // Using underscore to indicate unused parameter
             setErrorMessage('Something went wrong. Please try again.')
             setIsLoading(false)
         }
