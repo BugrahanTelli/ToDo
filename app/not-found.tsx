@@ -12,9 +12,9 @@ export default function NotFound() {
                 </h1>
                 <h2 className="mb-6 text-2xl font-bold">Signal Lost</h2>
                 <p className="text-base-content/70 mb-8">
-                    The neural connection failed. The data you're looking for
-                    cannot be found in the network. The system might have been
-                    corrupted or the data was never uploaded to begin with.
+                    The neural connection failed. The data you&apos;re looking
+                    for cannot be found in the network. The system might have
+                    been corrupted or the data was never uploaded to begin with.
                 </p>
                 <div className="mockup-code mb-8 text-left">
                     <pre data-prefix="$">

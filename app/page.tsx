@@ -94,7 +94,8 @@ export default async function HomePage() {
                                             </pre>
                                             <pre data-prefix="$">
                                                 <code>
-                                                    add_task "Escape the system"
+                                                    add_task &quot;Escape the
+                                                    system&quot;
                                                 </code>
                                             </pre>
                                             <pre
@@ -214,7 +215,6 @@ export default async function HomePage() {
                     </div>
                 </section>
 
-                {/* CTA Section */}
                 <section className="from-primary/20 to-secondary/20 bg-gradient-to-r py-16">
                     <div className="container mx-auto px-4 text-center">
                         <h2 className="neon-text mb-6 text-3xl font-bold">

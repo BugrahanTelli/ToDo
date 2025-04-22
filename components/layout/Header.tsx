@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
 
@@ -134,10 +135,18 @@ export function Header() {
                             >
                                 <div className="border-primary w-10 rounded-full border-2">
                                     {session.user?.image ? (
-                                        <img
-                                            src={session.user.image}
-                                            alt={session.user.name || ''}
-                                        />
+                                        <div className="relative h-full w-full">
+                                            <Image
+                                                src={session.user.image}
+                                                alt={
+                                                    session.user.name ||
+                                                    'User avatar'
+                                                }
+                                                fill
+                                                sizes="40px"
+                                                className="rounded-full"
+                                            />
+                                        </div>
                                     ) : (
                                         <div className="bg-primary/20 flex h-full w-full items-center justify-center text-xl">
                                             {session.user?.name

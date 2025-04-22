@@ -2,6 +2,7 @@ import { TaskList } from '@/components/tasks/TaskList'
 import { prisma } from '@/lib/db'
 import { getCurrentUser } from '@/lib/auth'
 import { Metadata } from 'next'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
     title: 'Tasks - CyberTask',
@@ -24,7 +25,7 @@ export default async function TasksPage({
     const priority = searchParams.priority as string | undefined
 
     // Build where clause for filtering
-    const where: any = {
+    const where: Record<string, unknown> = {
         userId: user.id,
     }
 
@@ -48,23 +49,23 @@ export default async function TasksPage({
             <h1 className="neon-text mb-8">Your Tasks</h1>
 
             <div className="mb-8 flex flex-wrap gap-4">
-                <a
+                <Link
                     href="/tasks"
                     className={`badge badge-lg ${
                         !status && !priority ? 'badge-primary' : 'badge-outline'
                     }`}
                 >
                     All
-                </a>
-                <a
+                </Link>
+                <Link
                     href="/tasks?status=PENDING"
                     className={`badge badge-lg ${
                         status === 'PENDING' ? 'badge-ghost' : 'badge-outline'
                     }`}
                 >
                     Pending
-                </a>
-                <a
+                </Link>
+                <Link
                     href="/tasks?status=IN_PROGRESS"
                     className={`badge badge-lg ${
                         status === 'IN_PROGRESS'
@@ -73,8 +74,8 @@ export default async function TasksPage({
                     }`}
                 >
                     In Progress
-                </a>
-                <a
+                </Link>
+                <Link
                     href="/tasks?status=COMPLETED"
                     className={`badge badge-lg ${
                         status === 'COMPLETED'
@@ -83,8 +84,8 @@ export default async function TasksPage({
                     }`}
                 >
                     Completed
-                </a>
-                <a
+                </Link>
+                <Link
                     href="/tasks?priority=CRITICAL"
                     className={`badge badge-lg ${
                         priority === 'CRITICAL'
@@ -93,7 +94,7 @@ export default async function TasksPage({
                     }`}
                 >
                     Critical
-                </a>
+                </Link>
             </div>
 
             <TaskList

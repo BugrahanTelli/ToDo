@@ -29,7 +29,7 @@ type SignUpFormValues = z.infer<typeof signUpSchema>
 export function SignUpForm() {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState<string | null>(null)
+    const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
     const {
         register,
@@ -41,7 +41,7 @@ export function SignUpForm() {
 
     const onSubmit = async (data: SignUpFormValues) => {
         setIsLoading(true)
-        setError(null)
+        setErrorMessage(null)
 
         try {
             const response = await fetch('/api/auth/signup', {
@@ -59,7 +59,7 @@ export function SignUpForm() {
             const result = await response.json()
 
             if (!response.ok) {
-                setError(result.message || 'Something went wrong')
+                setErrorMessage(result.message || 'Something went wrong')
                 setIsLoading(false)
                 return
             }
@@ -72,7 +72,7 @@ export function SignUpForm() {
             })
 
             if (signInResult?.error) {
-                setError(
+                setErrorMessage(
                     'Registration successful but could not sign in automatically'
                 )
                 setIsLoading(false)
@@ -82,14 +82,14 @@ export function SignUpForm() {
             router.push('/dashboard')
             router.refresh()
         } catch (error) {
-            setError('Something went wrong. Please try again.')
+            setErrorMessage('Something went wrong. Please try again.')
             setIsLoading(false)
         }
     }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            {error && (
+            {errorMessage && (
                 <div className="alert alert-error shadow-lg">
                     <div>
                         <svg
@@ -106,7 +106,7 @@ export function SignUpForm() {
                                 d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
                             />
                         </svg>
-                        <span>{error}</span>
+                        <span>{errorMessage}</span>
                     </div>
                 </div>
             )}

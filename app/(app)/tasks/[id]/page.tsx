@@ -4,7 +4,6 @@ import { prisma } from '@/lib/db'
 import { getCurrentUser } from '@/lib/auth'
 import {
     formatDateTime,
-    formatDate,
     formatStatus,
     formatPriority,
     isOverdue,
@@ -193,7 +192,7 @@ export default async function TaskDetailPage({ params }: TaskDetailPageProps) {
                                                     getCompletionPercentage(
                                                         task.status
                                                     ),
-                                            } as any
+                                            } as React.CSSProperties
                                         }
                                     >
                                         {getCompletionPercentage(task.status)}%

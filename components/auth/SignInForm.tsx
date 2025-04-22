@@ -18,7 +18,7 @@ type SignInFormValues = z.infer<typeof signInSchema>
 export function SignInForm() {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState<string | null>(null)
+    const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
     const {
         register,
@@ -30,7 +30,7 @@ export function SignInForm() {
 
     const onSubmit = async (data: SignInFormValues) => {
         setIsLoading(true)
-        setError(null)
+        setErrorMessage(null)
 
         try {
             const result = await signIn('credentials', {
@@ -40,7 +40,7 @@ export function SignInForm() {
             })
 
             if (result?.error) {
-                setError('Invalid email or password')
+                setErrorMessage('Invalid email or password')
                 setIsLoading(false)
                 return
             }
@@ -48,14 +48,14 @@ export function SignInForm() {
             router.push('/dashboard')
             router.refresh()
         } catch (error) {
-            setError('Something went wrong. Please try again.')
+            setErrorMessage('Something went wrong. Please try again.')
             setIsLoading(false)
         }
     }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            {error && (
+            {errorMessage && (
                 <div className="alert alert-error shadow-lg">
                     <div>
                         <svg
@@ -72,7 +72,7 @@ export function SignInForm() {
                                 d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
                             />
                         </svg>
-                        <span>{error}</span>
+                        <span>{errorMessage}</span>
                     </div>
                 </div>
             )}
@@ -137,7 +137,7 @@ export function SignInForm() {
 
             <div className="text-center text-sm">
                 <p>
-                    Don't have an account?{' '}
+                    Don&apos;t have an account?{' '}
                     <Link
                         href="/signup"
                         className="text-secondary hover:text-primary"
