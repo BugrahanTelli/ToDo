@@ -1,26 +1,100 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@plugin "daisyui" {
+  themes: all;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Cyberpunk-specific styles */
+.cyber-glitch {
+  position: relative;
+  overflow: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.cyber-glitch::before {
+  content: attr(data-text);
+  position: absolute;
+  left: -2px;
+  text-shadow: 1px 0 #75d1f0;
+  top: 0;
+  color: transparent;
+  background: transparent;
+  overflow: hidden;
+  animation: noise-anim-2 3s infinite linear alternate-reverse;
+}
+
+.cyber-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  text-shadow: -1px 0 #ff7598; 
+  top: 0;
+  color: transparent;
+  background: transparent;
+  overflow: hidden;
+  animation: noise-anim 2s infinite linear alternate-reverse;
+}
+
+@keyframes noise-anim {
+  0% {
+    clip-path: inset(29% 0 25% 0);
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  5% {
+    clip-path: inset(9% 0 38% 0);
+  }
+  10% {
+    clip-path: inset(96% 0 1% 0);
+  }
+  15% {
+    clip-path: inset(75% 0 23% 0);
+  }
+  20% {
+    clip-path: inset(46% 0 50% 0);
+  }
+  25% {
+    clip-path: inset(3% 0 46% 0);
+  }
+  30% {
+    clip-path: inset(82% 0 2% 0);
+  }
+  35% {
+    clip-path: inset(88% 0 1% 0);
+  }
+  40% {
+    clip-path: inset(91% 0 8% 0);
+  }
+  45% {
+    clip-path: inset(96% 0 2% 0);
+  }
+  50% {
+    clip-path: inset(59% 0 38% 0);
+  }
+  55% {
+    clip-path: inset(41% 0 53% 0);
+  }
+  60% {
+    clip-path: inset(21% 0 47% 0);
+  }
+  65% {
+    clip-path: inset(89% 0 4% 0);
+  }
+  70% {
+    clip-path: inset(1% 0 95% 0);
+  }
+  75% {
+    clip-path: inset(86% 0 4% 0);
+  }
+  80% {
+    clip-path: inset(95% 0 5% 0);
+  }
+  85% {
+    clip-path: inset(54% 0 36% 0);
+  }
+  90% {
+    clip-path: inset(70% 0 27% 0);
+  }
+  95% {
+    clip-path: inset(6% 0 16% 0);
+  }
+  100% {
+    clip-path: inset(95% 0 2% 0);
+  }
 }

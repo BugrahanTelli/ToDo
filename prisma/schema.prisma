@@ -1,0 +1,60 @@
+// This is your Prisma schema file
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Relations
+  tasks         Task[]
+  
+  @@map("users")
+}
+
+// Task model
+model Task {
+  id            String    @id @default(cuid())
+  title         String
+  description   String?
+  priority      Priority  @default(NORMAL)
+  status        Status    @default(PENDING)
+  dueDate       DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Relations
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("tasks")
+}
+
+// Task priority enum
+enum Priority {
+  LOW
+  NORMAL
+  HIGH
+  CRITICAL
+}
+
+// Task status enum
+enum Status {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  ARCHIVED
+}
